@@ -1,6 +1,8 @@
+import React from "react";
 import {Box, Button, Content, Image, Media} from "react-bulma-components";
 import {generateFromString} from "generate-avatar";
-import React from "react";
+
+import {formatDateToString} from '../utils/date';
 
 export default function UserInfo({myUsername, timestamp, sendRequest, disabled, subtext, color}) {
     return (
@@ -13,14 +15,13 @@ export default function UserInfo({myUsername, timestamp, sendRequest, disabled, 
                 <Media.Item>
                     <Content>
                         <p>
-                            <strong>{myUsername}</strong> <small>{timestamp}</small>
+                            <strong>{myUsername}</strong> <small>{formatDateToString(timestamp)}</small>
                             <br/>
                             {typeof sendRequest === "function" &&
                             <Button disabled={disabled} fullwidth rounded color="info"
                                     onClick={() => {
                                         sendRequest(myUsername)
-                                    }}>Share
-                                Picture</Button>}
+                                    }}>Compartilhar foto</Button>}
                             {subtext}
                         </p>
                     </Content>

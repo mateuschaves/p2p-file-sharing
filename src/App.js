@@ -1,6 +1,6 @@
 import 'react-bulma-components/dist/react-bulma-components.min.css';
 import "./components/EmptyPlaceholder.css"
-import {Container, Columns, Image, Navbar, Modal} from 'react-bulma-components/dist';
+import {Container, Columns, Image, Navbar, Modal} from 'react-bulma-components';
 import React, {useRef, useEffect, useState} from "react";
 import io from "socket.io-client";
 import Peer from "simple-peer";
@@ -9,7 +9,6 @@ import ShareRequest from "./components/ShareRequest";
 import ImageUploader from "./components/ImageUploader";
 import EmptyPlaceholder from "./components/EmptyPlaceholder";
 import Loader from "./components/Loader";
-import logo from './logo.png'
 
 function App() {
     const socket = useRef();
@@ -114,7 +113,7 @@ function App() {
         peerInstance.current = peer;
 
     };
-    const SERVER_URL = "/";
+    const SERVER_URL = "http://localhost:4000/";
     useEffect(() => {
         socket.current = io.connect(SERVER_URL);
 
@@ -155,8 +154,6 @@ function App() {
             >
                 <Navbar.Brand>
                     <Navbar.Item renderAs="a" href="#">
-                        <img src={logo}
-                             alt="Pic Share"/>
                     </Navbar.Item>
                     <Navbar.Burger/>
                 </Navbar.Brand>
@@ -175,18 +172,18 @@ function App() {
                     }
                     {(sending || receiving || sentRequest) &&
                     <Loader
-                        text={sending ? "the picture is being sent, please wait..." : sentRequest ? "Wait till user accepts your request" : "receiving picture, please wait... "}/>
+                        text={sending ? "A foto está sendo enviada, por favor aguarde..." : sentRequest ? "Espere até o usuário aceitar sua solicitação" : "Recebendo foto, por favor aguarde..."}/>
                     }
                     {rejected &&
                     <UserInfo myUsername={peerUsername}
-                              subtext={`${peerUsername} Rejected your request, sorry!`}
+                              subtext={`${peerUsername} Solicitação recusada!`}
                               color="#ffcac8"
 
                     />}
 
                     {receivedFilePreview &&
                     <React.Fragment>
-                        <UserInfo myUsername={peerUsername} subtext={`${peerUsername} has sent you this image`}
+                        <UserInfo myUsername={peerUsername} subtext={`${peerUsername} enviou uma foto`}
                                   color="#c7ffcc"/>
                         <Image src={receivedFilePreview}/>
                     </React.Fragment>
@@ -199,7 +196,8 @@ function App() {
                 <Columns>
                     <Columns.Column size="three-fifths">
                         <UserInfo myUsername={myUsername}
-                                  subtext="Share your username with others so they can send you a picture"
+                                  timestamp={new Date()}
+                                  subtext="Compartilhe seu usuário com outros, assim eles podem te enviar fotos"
                                   color="#EFFFFF"
                         />
                         <ImageUploader setFile={setFile}/>
@@ -211,8 +209,8 @@ function App() {
                             <UserInfo key={username} myUsername={username} timestamp={timestamp}
                                       sendRequest={sendRequest} disabled={!file || loading}/>
                             ) :
-                            <EmptyPlaceholder title="No Users Online Right Now!"
-                                              subtitle="Wait till someone connects to start sharing"
+                            <EmptyPlaceholder title="Nenhum usuário online agora!"
+                                              subtitle="Espere até alguém conectar para começar a compartilhar"
                                               image="data:image/png;base64,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"/>
                         }
 

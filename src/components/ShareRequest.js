@@ -6,7 +6,7 @@ export default function ShareRequest({peerUsername, acceptRequest, rejectRequest
     return (
         <Card style={{margin: "10px auto"}}>
             <Card.Header>
-                <Card.Header.Title>Share Request</Card.Header.Title>
+                <Card.Header.Title>Solicitação de compartilhamento</Card.Header.Title>
             </Card.Header>
             <Card.Content>
                 <Media>
@@ -19,7 +19,7 @@ export default function ShareRequest({peerUsername, acceptRequest, rejectRequest
                             <p>
                                 <strong>{peerUsername}</strong>
                                 <br/>
-                                {peerUsername} wants to send you a picture
+                                {peerUsername} quer te enviar uma foto
                             </p>
                         </Content>
                     </Media.Item>
@@ -27,9 +27,9 @@ export default function ShareRequest({peerUsername, acceptRequest, rejectRequest
             </Card.Content>
             <Card.Footer>
                 <Card.Footer.Item> <Button color="success" rounded onClick={acceptRequest}
-                                           fullwidth>Accept</Button></Card.Footer.Item>
+                                           fullwidth>Aceitar</Button></Card.Footer.Item>
                 <Card.Footer.Item><Button color="danger" rounded onClick={rejectRequest}
-                                          fullwidth>Reject</Button></Card.Footer.Item>
+                                          fullwidth>Recusar</Button></Card.Footer.Item>
             </Card.Footer>
         </Card>)
 }

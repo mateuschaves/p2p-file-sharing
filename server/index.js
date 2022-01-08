@@ -38,6 +38,7 @@ const usersList = (usersObj)=>{
 	return list;
 }
 io.on("connection", (socket) => {
+  console.log('connected')
   //generate username against a socket connection and store it
   const username = usernameGen.generateUsername("-");
   if (!users[username]) {
@@ -78,6 +79,6 @@ io.on("connection", (socket) => {
     logger.log(SOCKET_EVENT.REJECT_REQUEST, username);
   });
 });
-const port = process.env.PORT || 7000;
+const port = process.env.PORT || 4000;
 http.listen(port);
 logger.log("server listening on port", port);
