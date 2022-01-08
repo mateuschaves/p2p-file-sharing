@@ -113,7 +113,7 @@ function App() {
         peerInstance.current = peer;
 
     };
-    const SERVER_URL = "http://localhost:4000/";
+    const SERVER_URL = "http://localhost:4005/";
     useEffect(() => {
         socket.current = io.connect(SERVER_URL);
 

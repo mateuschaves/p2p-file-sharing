@@ -79,6 +79,6 @@ io.on("connection", (socket) => {
     logger.log(SOCKET_EVENT.REJECT_REQUEST, username);
   });
 });
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 4005;
 http.listen(port);
 logger.log("server listening on port", port);

@@ -15,7 +15,7 @@ export default function UserInfo({myUsername, timestamp, sendRequest, disabled, 
                 <Media.Item>
                     <Content>
                         <p>
-                            <strong>{myUsername}</strong> <small>{formatDateToString(timestamp)}</small>
+                            <strong>{myUsername}</strong> {timestamp && <small>{formatDateToString(timestamp)}</small>}
                             <br/>
                             {typeof sendRequest === "function" &&
                             <Button disabled={disabled} fullwidth rounded color="info"
