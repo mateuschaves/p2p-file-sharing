@@ -59,12 +59,12 @@ function App() {
         peer.on('data', data => {
 
             if (data.toString() === 'EOF') {
-                // Once, all the chunks are received, combine them to form a Blob
+                
                 const file = new Blob(fileChunks);
                 setReceivedFilePreview(URL.createObjectURL(file));
                 setReceiving(false);
             } else {
-                // Keep appending various file chunks
+                
                 fileChunks.push(data);
             }
 

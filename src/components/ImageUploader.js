@@ -14,7 +14,7 @@ export default function ImageUploader({setFile}) {
         },
     });
     useEffect(() => () => {
-        // Make sure to revoke the data uris to avoid memory leaks
+        
         URL.revokeObjectURL(filePreview)
     }, [filePreview]);
     return (

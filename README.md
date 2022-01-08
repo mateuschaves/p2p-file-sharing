@@ -8,8 +8,6 @@ Pic Share
 
 [Pic Share](https://pic-p2p-share.herokuapp.com) is a P2P picture sharing web application using webRTC
 
-[![Aimeos TYPO3 demo](img/screenshot-1.png)](https://pic-p2p-share.herokuapp.com)
-
 
 ## Installation
 

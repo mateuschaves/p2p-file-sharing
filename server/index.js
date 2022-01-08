@@ -39,27 +39,27 @@ const usersList = (usersObj)=>{
 }
 io.on("connection", (socket) => {
   console.log('connected')
-  //generate username against a socket connection and store it
+  
   const username = usernameGen.generateUsername("-");
   if (!users[username]) {
     users[username] = { id: socket.id, timestamp: new Date().toISOString() };
   }
   logger.log(SOCKET_EVENT.CONNECTED, username);
-  // send back username
+ 
   socket.emit(SOCKET_EVENT.CONNECTED, username);
-  // send online users list
+
   io.sockets.emit(SOCKET_EVENT.USERS_LIST, usersList(users) );
 
   socket.on(SOCKET_EVENT.DISCONNECTED, () => {
-    // remove user from the list
+   
     delete users[username];
-    // send current users list
+   
     io.sockets.emit(SOCKET_EVENT.USERS_LIST, usersList(users) );
     logger.log(SOCKET_EVENT.DISCONNECTED, username);
   });
 
   socket.on(SOCKET_EVENT.SEND_REQUEST, ({ username, signal, to }) => {
-    // tell user that a request has been sent
+   
     io.to(users[to].id).emit(SOCKET_EVENT.REQUEST_SENT, {
       signal,
       username,
@@ -68,13 +68,13 @@ io.on("connection", (socket) => {
   });
 
   socket.on(SOCKET_EVENT.ACCEPT_REQUEST, ({ signal, to }) => {
-    // tell user the request has been accepted
+   
     io.to(users[to].id).emit(SOCKET_EVENT.REQUEST_ACCEPTED, {signal});
     logger.log(SOCKET_EVENT.ACCEPT_REQUEST, username);
   });
 
   socket.on(SOCKET_EVENT.REJECT_REQUEST, ({ to }) => {
-    // tell user the request has been rejected
+  
     io.to(users[to].id).emit(SOCKET_EVENT.REQUEST_REJECTED);
     logger.log(SOCKET_EVENT.REJECT_REQUEST, username);
   });
