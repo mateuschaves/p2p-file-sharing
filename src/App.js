@@ -104,7 +104,6 @@ function App() {
                 const chunk = buffer.slice(0, chunkSize);
                 buffer = buffer.slice(chunkSize, buffer.byteLength);
 
-                // Off goes the chunk!
                 peer.send(chunk);
             }
             peer.send('EOF');
@@ -141,7 +140,6 @@ function App() {
     const [file, setFile] = useState(null);
     const [receivedFilePreview, setReceivedFilePreview] = useState("");
     useEffect(() => () => {
-        // Make sure to revoke the data uris to avoid memory leaks
         URL.revokeObjectURL(receivedFilePreview)
     }, [receivedFilePreview]);
 
