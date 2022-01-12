@@ -59,12 +59,12 @@ function App() {
         peer.on('data', data => {
 
             if (data.toString() === 'EOF') {
-                // Once, all the chunks are received, combine them to form a Blob
+                
                 const file = new Blob(fileChunks);
                 setReceivedFilePreview(URL.createObjectURL(file));
                 setReceiving(false);
             } else {
-                // Keep appending various file chunks
+                
                 fileChunks.push(data);
             }
 
@@ -104,7 +104,6 @@ function App() {
                 const chunk = buffer.slice(0, chunkSize);
                 buffer = buffer.slice(chunkSize, buffer.byteLength);
 
-                // Off goes the chunk!
                 peer.send(chunk);
             }
             peer.send('EOF');
@@ -141,7 +140,6 @@ function App() {
     const [file, setFile] = useState(null);
     const [receivedFilePreview, setReceivedFilePreview] = useState("");
     useEffect(() => () => {
-        // Make sure to revoke the data uris to avoid memory leaks
         URL.revokeObjectURL(receivedFilePreview)
     }, [receivedFilePreview]);
 
